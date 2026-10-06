@@ -1,0 +1,35 @@
+[
+  {
+    "id": "10c6f2a344644007bc1d2b4ae1985ec1",
+    "title": "broken street light",
+    "category": "Streetlight",
+    "location": "near srinivas city campus",
+    "description": "light broken near our collage",
+    "photo_url": "/static/uploads/1a752758d00b412b849c3e8e656ce88c_pexels-francesco-ungaro-9953451.jpg",
+    "author_name": "shazil",
+    "author_email": "shazil@gmail.com",
+    "status": "In Progress"
+  },
+  {
+    "id": "9d721c794eea4d9a8f3b0c1afcc6c75f",
+    "title": "waste dumbing",
+    "category": "Waste or cleanliness",
+    "location": "lalbhag,near pai convention centre",
+    "description": "there is a lot of waste near roadside ,it smells bad",
+    "photo_url": "/static/uploads/11ee960834c9415c9e266fca9a165419_daniel-miksha-4pcYm_S9OlQ-unsplash.jpg",
+    "author_name": "razeen",
+    "author_email": "razeen@gmail.com",
+    "status": "Resolved"
+  },
+  {
+    "id": "2c44942c531b452184996388f62d211c",
+    "title": "illegal activity",
+    "category": "Other",
+    "location": "statebank near medical store",
+    "description": "there is suspecious activity going on this area at night",
+    "photo_url": "/static/uploads/acd8276fb42f4c9ea07a6a20eada9aba_pexels-mart-production-7231430.jpg",
+    "author_name": "razeen",
+    "author_email": "razeen@gmail.com",
+    "status": "In Progress"
+  }
+]

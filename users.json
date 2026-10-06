@@ -1,0 +1,17 @@
+[
+  {
+    "user_name": "shazil",
+    "email": "unaismuhammed752@gmail.com",
+    "password_hash": "scrypt:32768:8:1$7SlT5aeqPOIdXLGg$2c63e7597445f8bac90cff73b2f7699eadfe53e0e79523c42b9438a1da67bd5e3d52f9e747faea4ae837e3d82eb7cc8e8d7fa9aca882004eff787010ad696535"
+  },
+  {
+    "user_name": "shazil",
+    "email": "shazil@gmail.com",
+    "password_hash": "scrypt:32768:8:1$UieXxWwm6N2h7RRh$198e76215636372def726b8ad2ce23c97dd4719c2574aa57b6931378e48e97f2872d7bd64dce243130c2845cda46e40981ac94300e57607dc92525dda033cd03"
+  },
+  {
+    "user_name": "razeen",
+    "email": "razeen@gmail.com",
+    "password_hash": "scrypt:32768:8:1$IGUmRxYzNc7j7TYB$59bd97a05672ca7e9d270570eb81edffe4c5cfb1192db0ab95b1fc0900b08c4242376b8c5e00346ea4e7de3a1ef5eb8d2b0cc22c776d24a1d06a0adf6cb6d514"
+  }
+]

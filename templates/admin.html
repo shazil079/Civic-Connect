@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin review | CivicConnect</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 28px 16px; font-family: Arial, sans-serif;
+      color: #19332f; background: linear-gradient(135deg, #e2f7ed, #e8efff);
+    }
+    main { max-width: 950px; margin: 20px auto; }
+    header, article {
+      margin-bottom: 18px; padding: 24px; background: white;
+      border-radius: 16px; box-shadow: 0 8px 24px #17332f12;
+    }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      background: linear-gradient(120deg, #087f68, #20a889); color: white;
+    }
+    header a { color: white; }
+    article { border: 1px solid #e5eeeb; }
+    article img {
+      display: block; width: 100%; max-height: 360px; margin: 14px 0;
+      border-radius: 10px; object-fit: cover;
+    }
+    label { display: block; margin: 14px 0 6px; font-weight: bold; }
+    select, button {
+      padding: 10px 12px; border: 1px solid #cbdad5;
+      border-radius: 8px; font: inherit;
+    }
+    button {
+      border: 0; background: #087f68; color: white;
+      font-weight: bold; cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>CivicConnect admin</h1>
+        <p>Review community reports and update their progress.</p>
+      </div>
+      <a href="{{ url_for('admin_logout') }}">Sign out</a>
+    </header>
+
+    {% if reports %}
+      {% for report in reports %}
+        <article>
+          <h2>{{ report.title }}</h2>
+          <p><strong>Category:</strong> {{ report.category }}</p>
+          <p><strong>Location:</strong> {{ report.location }}</p>
+          <p><strong>Description:</strong> {{ report.description }}</p>
+          <p><strong>Reported by:</strong> {{ report.author_name or "Community member" }}</p>
+          <p><strong>Email:</strong> {{ report.author_email or "Not provided" }}</p>
+          <p><strong>Current status:</strong> {{ report.status or "Submitted" }}</p>
+
+          {% if report.photo_url %}
+            <img src="{{ report.photo_url }}" alt="Photo for {{ report.title }}">
+          {% endif %}
+
+          <form action="{{ url_for('update_status') }}" method="post">
+            <input type="hidden" name="report_id" value="{{ report.id }}">
+            <label for="status-{{ report.id }}">Update status</label>
+            <select id="status-{{ report.id }}" name="status">
+              <option value="Submitted"
+                {% if report.status == "Submitted" %}selected{% endif %}>Submitted</option>
+              <option value="In Progress"
+                {% if report.status == "In Progress" %}selected{% endif %}>In Progress</option>
+              <option value="Resolved"
+                {% if report.status == "Resolved" %}selected{% endif %}>Resolved</option>
+            </select>
+            <button type="submit">Save status</button>
+          </form>
+        </article>
+      {% endfor %}
+    {% else %}
+      <article><p>There are no reports to review yet.</p></article>
+    {% endif %}
+  </main>
+</body>
+</html>

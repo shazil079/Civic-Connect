@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CivicConnect | Report an issue</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 32px 16px;
+      font-family: Arial, sans-serif;
+      background: #f1f7f5;
+      color: #19332f;
+    }
+
+    main {
+      max-width: 620px;
+      margin: 30px auto;
+      padding: 32px;
+      background: white;
+      border: 1px solid #e2ece8;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px #17332f12;
+    }
+
+    a { color: #087f68; text-decoration: none; font-weight: bold; }
+    h1 { margin: 24px 0 8px; }
+    .intro { color: #66807a; line-height: 1.5; }
+
+    label {
+      display: block;
+      margin: 20px 0 7px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbdad5;
+      border-radius: 9px;
+      font: inherit;
+    }
+
+    textarea { min-height: 130px; resize: vertical; }
+
+    button {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      border: 0;
+      border-radius: 9px;
+      background: #087f68;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { background: #066b58; }
+  </style>
+</head>
+<body>
+  <main>
+    <a href="/home">← Back to home</a>
+    <h1>Report a local issue</h1>
+    <p class="intro">Tell us what needs attention in your neighborhood.</p>
+
+   <form action="/report" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="user_name" value="{{ user_name }}">
+    <input type="hidden" name="email" value="{{ email }}">
+    <input type="hidden" name="user_name" value="{{ user_name }}">
+    <input type="hidden" name="email" value="{{ email }}">
+      <label for="title">Issue title</label>
+      <input id="title" name="title" placeholder="Example: Broken streetlight" required>
+
+      <label for="category">Category</label>
+      <select id="category" name="category" required>
+        <option value="">Choose a category</option>
+        <option>Road or sidewalk</option>
+        <option>Streetlight</option>
+        <option>Waste or cleanliness</option>
+        <option>Park or public space</option>
+        <option>Other</option>
+      </select>
+
+      <label for="location">Location</label>
+      <input id="location" name="location" placeholder="Street, landmark, or area" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description"
+                placeholder="Describe the issue and why it needs attention..."
+                required></textarea>
+
+     <label for="photo">Add a photo (optional)</label>
+<input
+  id="photo"
+  name="photo"
+  type="file"
+  accept="image/png,image/jpeg,image/gif,image/webp"
+>
+<p class="intro">Choose an image file up to 5 MB.</p>
+                <button type="submit">Submit report</button>
+    </form>
+  </main>
+</body>
+</html>

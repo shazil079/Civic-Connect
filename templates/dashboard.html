@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Dashboard | CivicConnect</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 28px 16px;
+      font-family: Arial, sans-serif;
+      color: #19332f;
+      background: linear-gradient(135deg, #e2f7ed, #e8efff);
+    }
+    main { max-width: 1000px; margin: 20px auto; }
+    .top, .profile, .community {
+      padding: 26px;
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px #17332f12;
+      margin-bottom: 20px;
+    }
+    .top {
+      background: linear-gradient(120deg, #087f68, #20a889);
+      color: white;
+    }
+    .top a { color: white; }
+    .profile {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .stat {
+      padding: 18px;
+      border-radius: 12px;
+      background: #f1f8f5;
+      overflow-wrap: anywhere;
+    }
+    .stat small { display: block; color: #66807a; margin-bottom: 8px; }
+    .stat strong { font-size: 20px; }
+    .report {
+      margin-top: 14px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #f7faf9;
+      border: 1px solid #e5eeeb;
+    }
+    .report img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .status-pill {
+      display: inline-block;
+      padding: 7px 11px;
+      border-radius: 16px;
+      background: #e1f8ee;
+      color: #087f68;
+      font-weight: bold;
+    }
+    .progress-track {
+      height: 10px;
+      margin: 10px 0 18px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #e5eeeb;
+    }
+    .progress-fill { height: 100%; border-radius: 8px; background: #20a889; }
+    .progress-fill.submitted { width: 20%; }
+    .progress-fill.in-progress { width: 60%; }
+    .progress-fill.resolved { width: 100%; }
+    label { display: block; margin: 12px 0 6px; font-weight: bold; }
+    select, button {
+      padding: 10px 12px;
+      border: 1px solid #cbdad5;
+      border-radius: 8px;
+      font: inherit;
+    }
+    button {
+      border: 0;
+      background: #087f68;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    @media (max-width: 750px) {
+      .profile { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .profile { grid-template-columns: 1fr; }
+    }
+    .leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 10px;
+  background: #f1f8f5;
+}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="top">
+      <a href="{{ url_for('home', user_name=user_name, email=email) }}">← Back to home</a>
+      <h1>{{ user_name }}’s Dashboard</h1>
+      <p>Your profile and reports from the whole community.</p>
+    </section>
+
+    <section class="profile">
+      <div class="stat"><small>User name</small><strong>{{ user_name }}</strong></div>
+      <div class="stat"><small>Email</small><strong>{{ email or "Not provided" }}</strong></div>
+      <div class="stat"><small>Your rank</small><strong>{{ rank }}</strong></div>
+      <div class="stat"><small>Your reports</small><strong>{{ report_count }}</strong></div>
+    </section>
+    <section class="community">
+  <h2>🏆 Top Reporters</h2>
+
+  {% if leaderboard %}
+    <ol>
+      {% for reporter in leaderboard %}
+        <li class="leaderboard-item">
+          <span>{{ reporter.user_name }}</span>
+          <strong>{{ reporter.report_count }} reports</strong>
+        </li>
+      {% endfor %}
+    </ol>
+  {% else %}
+    <p>No reporters yet. Submit the first community report!</p>
+  {% endif %}
+</section>
+
+    <section class="community">
+      <h2>Community reports and progress</h2>
+
+      {% if reports %}
+        {% for report in reports %}
+          <article class="report">
+            <h3>{{ report.title }}</h3>
+            <p><strong>Category:</strong> {{ report.category }}</p>
+            <p><strong>Location:</strong> {{ report.location }}</p>
+            <p>{{ report.description }}</p>
+            <p><strong>Reported by:</strong> {{ report.author_name or "Community member" }}</p>
+
+            <p><strong>Status:</strong>
+              <span class="status-pill">{{ report.status or "Submitted" }}</span>
+            </p>
+
+            <div class="progress-track">
+              <div class="progress-fill
+                {% if report.status == 'Resolved' %}resolved
+                {% elif report.status == 'In Progress' %}in-progress
+                {% else %}submitted{% endif %}">
+              </div>
+            </div>
+
+            {% if report.photo_url %}
+              <img src="{{ report.photo_url }}" alt="Photo for {{ report.title }}">
+            {% endif %}
+          </article>
+        {% endfor %}
+      {% else %}
+        <p>No community reports yet.</p>
+      {% endif %}
+    </section>
+  </main>
+</body>
+</html>
